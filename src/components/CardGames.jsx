@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
+import apigamesData from './apigames.json';
 
 // eslint-disable-next-line react/prop-types
 function CardGames({ apiType }) {
+
     const Colors = {
         success: 'border-green-600',
         warning: 'border-yellow-600',
@@ -10,30 +12,38 @@ function CardGames({ apiType }) {
         completed: 'border-cyan-600',
     };
 
+    // eslint-disable-next-line no-unused-vars
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        const GET_API_GAMES = 'https://sheetdb.io/api/v1/uj1vwr8ger7n8?sheet=_GamesP_2023';
-        const GET_API_SERIES = 'https://sheetdb.io/api/v1/uj1vwr8ger7n8?sheet=_TVShow_2023';
-        const GET_API_MOVIES = 'https://sheetdb.io/api/v1/uj1vwr8ger7n8?sheet=_MoviesL_2023';
+        // const GET_API_GAMES = 'https://sheetdb.io/api/v1/uj1vwr8ger7n8?sheet=_GamesP_2023';
+        // const GET_API_SERIES = 'https://sheetdb.io/api/v1/uj1vwr8ger7n8?sheet=_TVShow_2023';
+        // const GET_API_MOVIES = 'https://sheetdb.io/api/v1/uj1vwr8ger7n8?sheet=_MoviesL_2023';
 
-        const apiUrls = {
-            games: GET_API_GAMES,
-            series: GET_API_SERIES,
-            movies: GET_API_MOVIES,
-        };
-
-        fetch(apiUrls[apiType])
-            .then(response => response.json())
-            .then(apiData => {
-                const sortedData = apiData.sort((a, b) => b.id - a.id);
-                setData(sortedData);
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
-            });
+        
+        // const apiUrls = {
+        //     games: GET_API_GAMES,
+        //     series: GET_API_SERIES,
+        //     movies: GET_API_MOVIES,
+        // };
+        
+        // fetch(apiUrls[apiType])
+        //     .then(response => response.json())
+        //     .then(apiData => {
+        //         const sortedData = apiData.sort((a, b) => b.id - a.id);
+        //         setData(sortedData);
+        //     })
+        //     .catch(error => {
+        //         console.error('Error fetching data:', error);
+        //     });
+            const sortedData = apigamesData.sort((a, b) => b.id - a.id);
+            setData(sortedData);
     }, [apiType]);
 
+
+    useEffect(() => {
+        // Establece los juegos desde el archivo JSON importado
+      }, []);
 
     return (
         <section
